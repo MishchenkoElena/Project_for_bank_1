@@ -2,6 +2,9 @@ import json
 import logging
 import os
 
+if not os.path.exists("logs"):
+    os.makedirs("logs")
+
 file_path = os.path.join(os.path.dirname(__file__), "..", "data", "operations.json")
 
 logger = logging.getLogger("utils")  # Настройка логирования
