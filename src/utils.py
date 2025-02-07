@@ -1,16 +1,14 @@
 import json
 import logging
 import os
-
-if not os.path.exists("logs"):
-    os.makedirs("logs")
+from decorators import setup_logger
 
 file_path = os.path.join(os.path.dirname(__file__), "..", "data", "operations.json")
 
-logger = logging.getLogger("utils")  # Настройка логирования
+logger = setup_logger("utils.log")  # Настройка логирования
 
 # Создание хандлера для записи логов в файл
-file_handler = logging.FileHandler("../logs/utils.log", mode="w")
+file_handler = logging.FileHandler("./logs/utils.log", mode="w")
 file_handler.setLevel(logging.DEBUG)  # Установлен уровень логирования не ниже DEBUG
 
 # Создание и установка форматера для записи логов в файл

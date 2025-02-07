@@ -1,15 +1,13 @@
 import logging
-import os
+from decorators import setup_logger
 
-if not os.path.exists("logs"):
-    os.makedirs("logs")
 
 # Настройка логирования для модуля masks
-logger = logging.getLogger("masks")
+logger = setup_logger("masks.log")
 logger.setLevel(logging.DEBUG)
 
 # Создание хандлера для записи логов в файл
-file_handler = logging.FileHandler("../logs/masks.log", mode="w")
+file_handler = logging.FileHandler("./logs/masks.log", mode="w")
 file_handler.setLevel(logging.DEBUG)
 
 # Форматирование логов
