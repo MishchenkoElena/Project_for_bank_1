@@ -7,10 +7,10 @@ import pandas as pd
 logger = logging.getLogger(__file__)
 logger.setLevel(logging.DEBUG)
 
-# Настройка логирования
-log_file_path = "../logs/transactions.log"
-logging.basicConfig(filename=log_file_path, level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
-logger = logging.getLogger(__name__)
+file_handler = logging.FileHandler("./logs/data_read.log", mode="w")
+file_formatter = logging.Formatter("%(asctime)s - %(filename)s - %(funcName)s - %(levelname)s - %(message)s")
+file_handler.setFormatter(file_formatter)
+logger.addHandler(file_handler)
 
 
 def data_read_csv(csv_file_path: str) -> List[Dict]:
