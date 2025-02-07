@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import mock_open, patch
 
-from masks import get_mask_account, get_mask_card_number
+from src.masks import get_mask_account, get_mask_card_number
 
 
 class TestMasks(unittest.TestCase):
@@ -68,7 +68,3 @@ class TestMasks(unittest.TestCase):
     def test_letters_account_number(self, mock_file):  # Проверка работы функции при ошибочном вводе данных
         with self.assertRaises(ValueError):
             get_mask_account(user_number_account="abcde")
-
-
-if __name__ == "__main__":
-    unittest.main()  # Запуск тестов

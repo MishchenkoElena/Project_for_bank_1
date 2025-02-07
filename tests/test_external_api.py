@@ -23,7 +23,3 @@ class TestUtils(unittest.TestCase):
         operation = {"amount": 100, "currency": "USD"}  # Тестовая транзакция в долларах
         result = get_currency_conversion(operation)
         self.assertEqual(result, 9200.0)  # Проверяем, что результат конвертации в рубли равен 9200
-
-
-if __name__ == "__main__":
-    unittest.main()  # Запуск тестов
