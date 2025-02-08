@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import mock_open, patch
 
-from utils import get_json_operation
+from src.utils import get_json_operation
 
 
 class TestUtils(unittest.TestCase):
@@ -19,7 +19,7 @@ class TestUtils(unittest.TestCase):
     @patch("builtins.open", side_effect=[FileNotFoundError])
     def test_get_json_operation_file_not_found(self, mock_file):
         result = get_json_operation("data/operations.json")
-        self.assertEqual(result, None)
+        self.assertEqual(result, [])
 
     @patch("builtins.open", new_callable=mock_open, read_data='{"amount": 200, "currency": "EUR"}')
     def test_get_json_operation_not_a_list(self, mock_file):
@@ -31,7 +31,3 @@ class TestUtils(unittest.TestCase):
         result = get_json_operation("data/operations.json")
         self.assertEqual(len(result), 1)  # Проверяем, что загружена одна транзакция
         self.assertEqual(result[0]["amount"], 1000)  # Проверяем, что сумма транзакции равна 1000
-
-
-if __name__ == "__main__":
-    unittest.main()  # Запуск тестов

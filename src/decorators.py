@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 
 
-def setup_logger(filename=None):
+def setup_logger(filename):
     """Настройка логирования"""
     logger = logging.getLogger()
     logger.setLevel(logging.INFO)
@@ -23,7 +23,7 @@ def setup_logger(filename=None):
     return logger
 
 
-def log(filename=None):
+def log(filename=""):
     """Декоратор выполняет логирование выполнения функции, ее результаты при успешной операции или возникновении
     ошибок.
     Декоратор принимает необязательный аргумент filename, который определяет, куда будут записываться логи:
@@ -49,7 +49,3 @@ def log(filename=None):
         return wrapper
 
     return decorator
-
-
-if __name__ == "__main__":
-    log()

@@ -31,7 +31,7 @@ def test_log_error(capsys):
         assert captured.out == "function error: TypeError. Inputs:{4}, {[1, 2, 3]}"
 
 
-def test_log_good_file(capsys):
+def test_log_good_file():
     """Тестирует запись в файл после успешного выполнения"""
 
     @log(filename="mylog.txt")
@@ -44,7 +44,7 @@ def test_log_good_file(capsys):
         assert ("function called at" in line for line in file.readlines())
 
 
-def test_log_exception_file(capsys):
+def test_log_exception_file():
     """Тестирует запись в файл после ошибки"""
 
     @log(filename="mylog.txt")
