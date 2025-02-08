@@ -28,9 +28,8 @@ def data_read_csv(csv_file_path: str) -> List[Dict]:
         logger.info(f"Успешно считано {len(transactions)} транзакций из файла: {csv_file_path}")
         return transactions
     except Exception as e:
-        logger.error(f"При чтении файла произошла ошибка {e}")
+        logger.error(f"При чтении файла произошла ошибка: {type(e).__name__}, {e}")
         raise
-
 
 def data_read_excel(excel_file_path: str) -> List[Dict]:
     """Функции для считывания финансовых операций принимает путь к файлу Excel в качестве аргумента.
@@ -42,5 +41,5 @@ def data_read_excel(excel_file_path: str) -> List[Dict]:
         logger.info(f"Успешно считано {len(transactions)} транзакций из файла: {excel_file_path}")
         return transactions
     except Exception as e:
-        logger.error(f"При чтении файла произошла ошибка {e}")
+        logger.error(f"При чтении файла произошла ошибка: {type(e).__name__}, {e}")
         raise
