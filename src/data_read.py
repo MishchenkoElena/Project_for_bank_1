@@ -7,34 +7,42 @@ import pandas as pd
 logger = logging.getLogger(__file__)
 logger.setLevel(logging.DEBUG)
 
-file_handler = logging.FileHandler("./logs/data_read.log", mode="w")
-file_formatter = logging.Formatter("%(asctime)s - %(filename)s - %(funcName)s - %(levelname)s - %(message)s")
-file_handler.setFormatter(file_formatter)
-logger.addHandler(file_handler)
+# Настройка логирования
+log_file_path = "../logs/transactions.log"
+logging.basicConfig(filename=log_file_path, level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logger = logging.getLogger(__name__)
 
 
-def data_reader_csv_excel(file_name: str) -> List[Dict]:
-    """Функция для считывания финансовых операций принимает путь к файлу CSV или Excel в качестве аргумента.
+def data_read_csv(csv_file_path: str) -> List[Dict]:
+    """Функция для считывания финансовых операций принимает путь к файлу CSV в качестве аргумента.
     Возвращает список словарей транзакций"""
-    # Определяем формат файла для выбора соответствующей обработки информации.
-    if file_name.endswith("csv"):
-        try:
-            logger.info("Программа пытается прочитать файл-csv")
-            transactions_df = pd.read_csv(file_name, sep=";", decimal=",")
-            logger.info("Программа формирует список транзакций из файла")
-            transactions_list = transactions_df.to_dict(orient="records")
-            return transactions_list
-        except Exception as e:
-            logger.error(f"При чтении файла произошла ошибка {e}")
-    elif file_name.endswith("xlsx"):
-        try:
-            logger.info("Программа пытается прочитать файл-xlsx")
-            transactions_df = pd.read_excel(file_name)
-            logger.info("Программа формирует список транзакций из файла")
-            transactions_list = transactions_df.to_dict(orient="records")
-            return transactions_list
-        except Exception as e:
-            logger.error(f"При чтении файла произошла ошибка {e}")
-    else:
-        logger.error("ValueError: Неподдерживаемый формат файла")
-        raise ValueError("Неподдерживаемый формат файла")
+    logger.info(f"Попытка прочитать данные из CSV файла: {csv_file_path}")
+    try:
+        df = pd.read_csv(csv_file_path, sep=";", decimal=",")
+        transactions = df.to_dict(orient="records")
+        logger.info(f"Успешно считано {len(transactions)} транзакций из файла: {csv_file_path}")
+        return transactions
+    except Exception as e:
+        logger.error(f"При чтении файла произошла ошибка: {type(e).__name__}, {e}")
+        raise
+
+
+def data_read_excel(excel_file_path: str) -> List[Dict]:
+    """Функция для считывания финансовых операций принимает путь к файлу EXCEL в качестве аргумента.
+    Возвращает список словарей транзакций"""
+    try:
+        logger.info(f"Попытка прочитать данные из Excel файла: {excel_file_path}")
+        df = pd.read_excel(excel_file_path)
+        transactions = df.to_dict(orient="records")
+        logger.info(f"Успешно считано {len(transactions)} транзакций из файла: {excel_file_path}")
+        return transactions
+    except Exception as e:
+        logger.error(f"При чтении файла произошла ошибка: {type(e).__name__}, {e}")
+        raise
+
+
+if __name__ == "__main__":
+    csv_file_path = "../data/transactions.csv"
+    excel_file_path = "../data/transactions_excel.xlsx"
+    print(data_read_csv(csv_file_path))
+    print(data_read_excel(excel_file_path))
