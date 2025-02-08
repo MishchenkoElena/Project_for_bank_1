@@ -1,9 +1,6 @@
 import json
 import logging
-import os
 from typing import Dict, List, Union
-
-file_path = os.path.join(os.path.dirname(__file__), "..", "data", "operations.json")
 
 logger = logging.getLogger(__file__)  # Настройка логирования
 
@@ -18,7 +15,7 @@ file_handler.setFormatter(file_formatter)
 logger.addHandler(file_handler)
 
 
-def get_json_operation(file_pathstr) -> List[Dict[str, Union[str, int, dict, float]]]:
+def get_json_operation(file_path: str) -> List[Dict[str, Union[str, int, dict, float]]]:
     """Функция принимает на вход путь до JSON - файла и возвращает список словарей с данными о финансовых
     транзакциях. Если файл пустой, содержит не список или не найден, функция возвращает пустой список"""
 
@@ -38,7 +35,3 @@ def get_json_operation(file_pathstr) -> List[Dict[str, Union[str, int, dict, flo
     except FileNotFoundError:
         logger.error(f"Файл {file_path} не найден")
         return []
-
-
-if __name__ == "__main__":
-    print(get_json_operation(file_path))
