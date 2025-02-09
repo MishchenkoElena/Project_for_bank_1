@@ -4,7 +4,7 @@ from typing import Union
 logger = logging.getLogger(__file__)
 
 # Создание хандлера для записи логов в файл
-file_handler = logging.FileHandler("./logs/masks.log", mode="w")
+file_handler = logging.FileHandler("../logs/masks.log", mode="w")
 # Настройка логирования для модуля masks
 logger.setLevel(logging.DEBUG)
 
