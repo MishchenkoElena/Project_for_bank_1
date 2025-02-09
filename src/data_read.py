@@ -26,6 +26,7 @@ def data_read_csv(csv_file_path: str) -> List[Dict]:
         logger.error(f"При чтении файла произошла ошибка: {type(e).__name__}, {e}")
         raise
 
+
 def data_read_excel(excel_file_path: str) -> List[Dict]:
     """Функция для считывания финансовых операций принимает путь к файлу EXCEL в качестве аргумента.
     Возвращает список словарей транзакций"""
@@ -38,10 +39,3 @@ def data_read_excel(excel_file_path: str) -> List[Dict]:
     except Exception as e:
         logger.error(f"При чтении файла произошла ошибка: {type(e).__name__}, {e}")
         raise
-
-
-if __name__ == "__main__":
-    csv_file_path = "../data/transactions.csv"
-    excel_file_path = "../data/transactions_excel.xlsx"
-    print(data_read_csv(csv_file_path))
-    print(data_read_excel(excel_file_path))
