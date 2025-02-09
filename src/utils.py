@@ -8,7 +8,7 @@ file_path = os.path.join(os.path.dirname(__file__), "..", "data", "operations.js
 logger = logging.getLogger(__file__)  # Настройка логирования
 
 # Создание хендлера для записи логов в файл
-file_handler = logging.FileHandler("./logs/utils.log", mode="w")
+file_handler = logging.FileHandler("../logs/utils.log", mode="w")
 file_handler.setLevel(logging.DEBUG)  # Установлен уровень логирования не ниже DEBUG
 
 # Создание и установка форматера для записи логов в файл
